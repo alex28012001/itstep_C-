@@ -57,8 +57,7 @@ int main()
 {
 	char str[100], *s, oper[19];
 	cin >> str;
-	if (check(str))cout << "Is Right\n";
-	else cout << "Is wrong\n";
+	cout << boolalpha << check(str);
 		   
 
 	return 0;
