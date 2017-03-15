@@ -1,3 +1,4 @@
+//ex 1
 #include<iostream>
 using namespace std;
 
@@ -37,27 +38,53 @@ bool check(char * str)
 	LIFO st;
 	st.top = 0;
 	int i = 0;
+	
 
 	while (str[i])
 	{
 		if (str[i] == '(')push(&st, str[i]);
-		else if (str[i] == ')') {
+		if (str[i ] == '[')push(&st, str[i]);
+		if (str[i] == '{')push(&st, str[i]);
+
+
+		else if (str[i] == ']')
+		{
 			if (st.top != 0)pop(&st);
 			else flag = false;
 		}
+
+
+		else if (str[i] == ')')
+		{
+			if (st.top != 0)pop(&st);
+			else flag = false;
+		}
+
+
+		else if (str[i] == '}')
+		{
+			if (st.top != 0)pop(&st);
+			else flag = false;
+		}
+
+
+
 			i++;
 		}
 		if (st.top != 0)flag = false;
 		return flag;
-		
+
+
+
 	}
 
 
 int main()
 {
 	char str[100], *s, oper[19];
+	cout << "Input skobki:  ";
 	cin >> str;
-	cout << boolalpha << check(str);
+	cout << boolalpha << check(str)<<"\n";
 		   
 
 	return 0;
