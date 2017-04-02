@@ -1,0 +1,86 @@
+#include<iostream>
+#include<cstring>
+using namespace std;
+
+
+struct Node //обьявление узла очереди
+{
+	int data;	//данные в узле
+	Node *next;	//указатель на следущий узел
+};
+
+
+struct FIFO //обьявление очереди	
+{
+	Node * head, *tail;
+};
+
+
+void init(FIFO * q) //иницилизация пустой очереди
+{
+	q->head = NULL;
+	q->tail = NULL;
+}
+
+
+FIFO push_back(FIFO que, int value)	//добовляем в конец очереди элемент
+{
+
+	Node * cur = (Node *)malloc(sizeof(Node));	//создаёт узел
+	cur->data = value;	//создание данные в новый узел
+	cur->next = NULL;	//задаём указатель
+	if (que.tail)	//если есть элементы в очереди
+		que.tail->next = cur;	//переместили указатель хвоста с NULL на новый элемет который мы создали 
+
+	que.tail = cur;	//перемещаем сам хвост на добавленный элемент элемент.
+	if (que.head == NULL)	//если в очереди ничего небыло
+		que.head = que.tail; //то изменяем и голову и хвост очереди
+		
+
+	return que;
+
+}
+
+
+
+
+int pop_front(FIFO *que)	//удаляем элемент в начале очереди 
+{
+	int temp;
+	Node * cur = que->head;		//создаём копию головы
+	if (que->head == NULL)		//если очередь пуста ,то мы выходим из функции
+	{                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+	
+		return 0;
+	}
+
+
+	temp = que->head->data;		//копируем данные из головы в переменную temp
+	que->head = cur->next;		//перемещение головы на следущий элемент
+
+
+	free(cur);		//удаляем узел
+
+	return temp;
+}
+
+
+int main()
+{
+	setlocale(0, "");
+	FIFO Q1;
+
+	init(&Q1);
+
+	Q1 = push_back(Q1, rand() % 10 + 1);
+		Q1 = push_back(Q1, rand() % 10 + 1);
+
+	
+	
+		cout << pop_front(&Q1) << endl;
+		cout << pop_front(&Q1) << endl;
+
+
+
+	return 0;
+}
