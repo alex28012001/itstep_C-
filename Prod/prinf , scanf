@@ -51,6 +51,8 @@ int main()
 
 */
 
+
+/*
 #include<stdio.h>
 int main()
 {
@@ -58,6 +60,24 @@ int main()
 	int ivalue = 777;
 	printf("ivalue = %, ivalue_hex = %x");
 	printf("%*d", 10, ivalue);
+
+
+
+	return 0;
+}
+
+*/
+
+#define _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
+int main()
+{
+	char A[10];
+	scanf("%5s", A);
+	printf("Str: %s", A);
+
+	
+
 
 
 
