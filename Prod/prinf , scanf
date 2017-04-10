@@ -72,13 +72,24 @@ int main()
 #include<stdio.h>
 int main()
 {
+	//ex1
+	
+	/*
 	char A[10];
-	scanf("%5s", A);
-	printf("Str: %s", A);
+	scanf("%s", A);
+	printf("Str: %20s", A);
+	*/
 
+
+	//ex1
+	int data = 0;
+
+	scanf("%t", data);
 	
 
 
+	printf("Data: %d", data);
+	
 
 
 	return 0;
