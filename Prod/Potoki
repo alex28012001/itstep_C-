@@ -360,8 +360,8 @@ int main()
 		fprintf(out, "%0.2f \n", avg(student[i]));
 	}
 
-
-
+	
+	fprintf(out, "Whole avg: %0.2f \n", whole_avg(student, size));
 
 	/*cout << "Whole avg: " << whole_avg(student, size);
 
