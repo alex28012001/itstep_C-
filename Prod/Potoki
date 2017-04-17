@@ -194,6 +194,209 @@ int main()
 
 
 
+EX3
+input.txt
+
+
+
+Ivanov 4  456345   5 3 4  
+Petrov  4  456348   4 3 4
+Ivanov  5 456340   5 3 5
+Petrova  5 456349   4 5 4
+
+--------------------------------------
+
+students.cpp
+
+
+
+
+#include"Header.h"
+
+
+
+Student read(FILE *in)
+{
+	Student student;
+	fscanf(in, "%s%d%d%d%d%d", student.FIO, &student.group, &student.num_zuch, &student.marks[0], &student.marks[1], &student.marks[2]);
+	return student;
+}
+
+
+
+
+void output(Student student, FILE *out)
+{
+	fprintf(out, "%s %d %d %d %d %d ", student.FIO, student.group, student.num_zuch, student.marks[0], student.marks[1], student.marks[2]);
+}
+
+
+
+float avg(Student student)
+{
+	float sred = 0;
+	for (int i = 0; i < 3; i++)
+		sred += student.marks[i];
+
+	return sred / 3;
+}
+
+
+
+float whole_avg(Student *student, int size)
+{
+	float w_sred = 0;
+	for (int i = 0; i < size; i++)
+		w_sred += avg(student[i]);
+
+	return w_sred / size;
+}
+
+bool otlichniki(Student student)
+{
+	bool flag = 1;
+	for (int i = 0; i < 3; i++)
+	if (student.marks[i] < 9) flag = 0;
+
+	return flag;
+}
+
+
+/*
+void change_marks(Student *student, char *name)
+{
+	if (strcmp(name, student->FIO) == 0)
+	{
+		for (int i = 0; i < 3; i++)
+		{
+			cout << "Input " << i + 1 << "mark: ";
+			cin >> student->marks[i];
+		}
+	}
+}
+*/
+
+
+--------------------------------------------------------------------------------------
+
+Header.h
+
+
+
+
+#pragma once
+#define _CRT_SECURE_NO_WARNINGS
+#include<iostream>
+#include<cstring>
+using namespace std;
+
+const int size = 4;
+
+struct Student
+{
+	char FIO[40];
+	short group;
+	unsigned long num_zuch;
+	int marks[3];
+};
+
+
+Student read(FILE * in);
+
+void output(Student student,FILE *out);
+
+
+float avg(Student student);
+
+float whole_avg(Student *student, int size);
+
+
+bool otlichniki(Student student);
+
+
+void change_marks(Student *student, char *name);
+
+
+--------------------------------------------------------------------------------------------
+
+main.cpp
+
+
+
+
+
+#include"Header.h"
+
+
+int main()
+{
+	Student student[size];
+
+	FILE *in, *out;
+	if (!(in = fopen("Input.txt", "r")))
+	{
+		printf("Error");
+		return 1;
+	}
+
+	
+	if (!(out = fopen("Output.txt", "w")))
+	{
+		printf("Error");
+		return 2;
+	}
+
+
+
+
+	for (int i = 0; i < size; i++)
+		student[i] = read(in);
+
+
+
+	for (int i = 0; i < size; i++)
+	{
+		output(student[i],out);
+		fprintf(out, "%0.2f \n", avg(student[i]));
+	}
+
+
+
+
+	/*cout << "Whole avg: " << whole_avg(student, size);
+
+	cout << "Good boys: ";
+	for (int i = 0; i < size; i++)
+	{
+		if (otlichniki(student[i]))
+			cout << student[i].FIO << " ";
+	}
+
+	cout << "Input student for changing marks: ";
+	char st[20]; cin >> st;
+	for (int i = 0; i < size; i++)
+		change_marks(&student[i], st);
+
+	for (int i = 0; i < size; i++)
+		output(student[i]);
+
+
+	cout << endl;
+	*/
+
+
+
+	return 0;
+}
+
+
+
+
+
+
+
+
+
 
 
 
