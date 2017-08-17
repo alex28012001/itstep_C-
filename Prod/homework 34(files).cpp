@@ -1,0 +1,53 @@
+//ex1
+
+
+#define _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
+#include<cstring>
+#include<stdlib.h>
+bool correct(FILE *in)
+{
+	if (!in) 
+	{
+		printf("Error\n");
+		return 0;
+	}
+	return 1;
+}
+void compare(FILE *in1, FILE *in2,FILE*out)
+{
+	fseek(in1, 0, SEEK_SET);
+	char str1[256],str2[256];
+	while (!feof(in1))
+	{
+		fgets(str1, 255, in1);
+		bool flag = true;
+		fseek(in2, 0, SEEK_SET);
+		while (!feof(in2))
+		{
+			fgets(str2, 255, in2);
+			if (strcmp(str1, str2) == 0)
+			{
+				flag = false;
+				break;
+			}
+		}
+		if (flag) fputs(str1,out);
+
+	}
+}
+int main()
+{
+	FILE *in1, *in2,*out;//объявляем два потока, in для чтения, out для записи
+	in1 = fopen("Text1.txt", "r");
+	in2 = fopen("Text2.txt", "r");
+	out = fopen("Final.txt", "a");
+	if (!correct(in1) && !correct(in2) && !correct(out)) return 1;
+	compare(in1, in2, out);
+	compare(in2, in1, out);
+
+	fclose(in1);
+	fclose(in2);
+	fclose(out);
+	return 0;
+}
